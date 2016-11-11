@@ -8,8 +8,6 @@ const PATH_REGEX = /(\'|\")\s*(.*?)\s*(\'|\")/;
 // .js suffix
 const SUFFIX = ".js";
 
-function _inlineImports(path)
-
 /*
  * Extract dependencies imported by 'require' to make it available for browsers.
  * It will check all entries under all paths instead of one entry for all paths if multiple

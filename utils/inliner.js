@@ -5,15 +5,15 @@ const path = require("path");
 const fs = require("fs");
 
 /*
- * Inline all specified files that fit the given regex and replace the content in the argument object
+ * Inline all specified files that fit the given regex and replace the HTML content in the argument object
  * passed in with the new text
  *
- * @param {string} argObj.path Path name of the HTML file name to process
- * @param {string} argObj.content Content of the HTML file name to process
- * @param {string} argObj.type File type, CSS or JS (case-insensitive)
- * @param {RegExp} argObj.fileRegEx Regular expression representing the file names
+ * @param {string} options.path Path name of the HTML file name to process
+ * @param {string} options.content Content of the HTML file name to process
+ * @param {string} options.type File type, CSS or JS (case-insensitive)
+ * @param {RegExp} options.fileRegEx Regular expression representing the file names
  */
-function inlineFiles(argObj) {
+function inlineFiles(options) {
   // Note: exclude all links with any type of URL reference or absolute path
   const CSS_INLINE_TAG_REGEX_START = /<link.*?rel\s*=\s*"stylesheet".*?href\s*=\s*"(?!\w+\:).*/;
   const JS_INLINE_TAG_REGEX_START = /<script.*?src\s*=\s*"(?!\w+\:).*/;
@@ -23,15 +23,15 @@ function inlineFiles(argObj) {
   const JS_SRC_REGEX = /src\s*=\s*"(.*)"/;
 
   // Check for argument object  
-  if (typeof argObj === "undefined") {
+  if (typeof options === "undefined") {
     throw new Error("No argument object specified!");
   }
 
-  var htmlPathName = argObj.path,
-      htmlText = argObj.content,
-      fileRegEx = argObj.fileRegEx,
-      type = argObj.type ?
-        argObj.type.toLowerCase() === "css" || argObj.type.toLowerCase() === "js" ? argObj.type : "css" : "css";
+  var htmlPathName = options.path,
+      htmlText = options.content,
+      fileRegEx = options.fileRegEx,
+      type = options.type ?
+        options.type.toLowerCase() === "css" || options.type.toLowerCase() === "js" ? options.type : "css" : "css";
 
   // Check for invalid dirname and regex
   if (!htmlText || !fileRegEx || !(fileRegEx instanceof RegExp)) {
@@ -80,7 +80,25 @@ function inlineFiles(argObj) {
   }
   htmlText = htmlText.replace(tagToReplace, finalTag);
 
-  argObj.content = htmlText;
+  options.content = htmlText;
+}
+
+function _inlineImportsHelper() {
+
+}
+
+/*
+ * Inline all imports (requires) in a js file
+ *
+ * @param {string} options.path Path name of the js file name to process
+ * @param {string} options.content Content of the js file name to process
+ */
+function inlineImports(options) {
+  // Check arguments
+
+  // Get all requires and paths
+
+  // For every require, if the require is currently globally visible, omit it. Else inline it and if
 }
 
 module.exports = {
