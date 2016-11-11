@@ -1,10 +1,24 @@
 const log = console.log;
 const MAX = Math.pow(2, 32);
 
-function add32BitPaddings(binStr) {
-  while (binStr.length < 32)
+function addBitFrontPaddings(binStr, size) {
+  while (binStr.length < size)
     binStr = "0" + binStr;
   return binStr;
+}
+function addBitBackPaddings(binStr, size) {
+  while (binStr.length < size)
+    binStr += "0";
+  return binStr;
+}
+
+function createFloatingBinStr(signed, exp, frac, size) {
+  signed = signed || "0";
+  exp = exp || "0";
+  frac = frac || "0";
+  size = size || 32;
+
+  return signed + addBitFrontPaddings(exp, size === 32 ? 8 : 11) + addBitBackPaddings(frac, size === 32 ? 23 : 52); 
 }
 
 function B2T(binStr) {
@@ -27,10 +41,10 @@ function U2B(num) {
   return num.toString(2);
 }
 
-function T2B(num) {
-  if (num >= 0) return add32BitPaddings(U2B(num));
+function T2B(num, size) {
+  if (num >= 0) return addBitFrontPaddings(U2B(num), size);
 
-  var ret = add32BitPaddings(Math.abs(num).toString(2));
+  var ret = addBitFrontPaddings(Math.abs(num).toString(2), size);
   ret = ret.split("");
   for (let i = 0; i < ret.length; i++)
     ret[i] = ret[i] === '0' ? '1' : '0';
@@ -44,21 +58,5 @@ function T2U(num) {
 
 function U2T(num) {
   return num >= MAX ? MAX - num :  num;
-}
-
-function B2F(binStr) {
-  let m = binStr.indexOf('.');
-  if (m === -1) {
-    return B2T(binStr);
-  }
-
-  let weight = m - 1;
-  let ret = 0;
-  for (let i = 0, ll = binStr.length; i < ll; i++) {
-    if (binStr[i] !== '.') {
-      ret += (Math.pow(2, weight--) * parseInt(binStr[i]));
-    }
-  }
-  return ret;
 }
 
