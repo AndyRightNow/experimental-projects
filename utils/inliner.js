@@ -83,7 +83,17 @@ function inlineFiles(options) {
   options.content = htmlText;
 }
 
-function _inlineImportsHelper() {
+function _inlineImportsHelper(path, content, table) {
+  // Get all requires and paths
+
+  // If there is no valid require
+    // If there is a "module.exports = ", replace it with "return"
+
+    // Else if there is no "module.exports = ", replace all "module.exports" with "INLINEIMPORTSRETVARNAME" and add a "var INLINEIMPORTSRETVARNAME = {};" at the beginning of the text 
+
+    // Wrap the text in an IIFE and return the IIFE string 
+
+  // If there are valid requires, for every require, if the require is currently visible, omit it. Else recursively call this function on it and add it too the visible table of the current level
 
 }
 
@@ -96,9 +106,9 @@ function _inlineImportsHelper() {
 function inlineImports(options) {
   // Check arguments
 
-  // Get all requires and paths
+  // Build a table tree root node
 
-  // For every require, if the require is currently globally visible, omit it. Else inline it and if
+
 }
 
 module.exports = {
