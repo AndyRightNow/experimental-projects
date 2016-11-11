@@ -9,6 +9,7 @@ const path = require("path");
 const CommandsRunner = require("./commands-runner");
 const benchmark = require("./benchmark");
 const RequestPromise = require("./request-promise");
+const packer = require("./packer/packer");
 
 // Constants
 const TEST_ROOT_DIR = path.resolve(__dirname, "../test");
