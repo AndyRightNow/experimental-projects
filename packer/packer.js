@@ -1,3 +1,5 @@
+"use strict";
+
 const extract = require("./../utils/extract");
 const path = require("path");
 
