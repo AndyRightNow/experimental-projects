@@ -7,11 +7,15 @@ const TableTreeNode = require("./../deps/table-tree");
 
 // Match only require statements with raw relative or absolute paths
 const LOCAL_REQUIRE_REGEX = /require\s*\(\s*([\']|[\"])+.*?([\\]|[\/])+.*?\)/g;
+// Match any function with the name "require"
 const REQUIRE_FUNCTION_REGEX = /require\s*\(/;
-const DECLARATION_REQUIRE_REGEX = /(const|var|let|\,)\s*([\w\_\d\$]*)\s*\=\s*/;
+// Match any declaration of require. E.g. "const m = require("m")"
+const REQUIRE_DECLARATION_REGEX = /(const|var|let|\,)\s*([\w\_\d\$]*)\s*\=\s*/;
 // Match a path as the second capture group
 const PATH_REGEX = /(\'|\")\s*(.*?)\s*(\'|\")/;
+// Match "module.exports =" with any extra spaces
 const EXPORTS_EQUAL_REGEX = /module\s*\.\s*exports\s*\=/;
+// Match "module.exports" with any extra spaces
 const EXPORTS_REGEX = /module\s*\.\s*exports\s*/;
 const JS_SUFFIX = ".js";
 
@@ -119,7 +123,7 @@ function _inlineImportsHelper(p, content, table) {
           newReqRegex = newReqRegex.replace(val, "\\" + val);
         });
 
-        content = content.replace(new RegExp(DECLARATION_REQUIRE_REGEX.source + newReqRegex), "");
+        content = content.replace(new RegExp(REQUIRE_DECLARATION_REGEX.source + newReqRegex), "");
       }
       // Else recursively call this function on it and add it to the visible table of the current level
       else {
