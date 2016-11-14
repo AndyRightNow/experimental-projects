@@ -1,9 +1,9 @@
 "use strict";
 
 const path = require("path");
-const inlineFiles = require("./utils/inliner").inlineFiles;
-const TaskRunner = require("./task-runner/task-runner");
-const replace = require("./utils/replace");
+const inlineFiles = require("./../inliner").inlineFiles;
+const TaskRunner = require("./../task-runner");
+const replace = require("./../replace");
 
 const ROOT_DIR = path.resolve(__dirname, "../");
 

@@ -1,9 +1,9 @@
 "use strict";
 
-const extract = require("./extract");
+const extract = require("./../extract");
 const path = require("path");
 const fs = require("fs");
-const TableTreeNode = require("./../deps/table-tree");
+const TableTreeNode = require("./../table-tree");
 
 // Match only require statements with raw relative or absolute paths
 const LOCAL_REQUIRE_REGEX = /require\s*\(\s*([\']|[\"])+.*?([\\]|[\/])+.*?\)/g;

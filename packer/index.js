@@ -1,6 +1,6 @@
 "use strict";
 
-const extract = require("./../utils/extract");
+const extract = require("./../extract");
 const path = require("path");
 
 // .js suffix

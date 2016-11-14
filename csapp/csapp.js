@@ -1,3 +1,5 @@
+"use strict";
+
 const log = console.log;
 const MAX = Math.pow(2, 32);
 

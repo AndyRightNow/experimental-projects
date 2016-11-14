@@ -1,3 +1,5 @@
+"use strict";
+
 const NEWLINE_REGEX = /[\n\r]+/g;
 
 /*
