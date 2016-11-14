@@ -141,13 +141,13 @@ function _inlineImportsHelper(p, content, table) {
     content =
       "(function() { " +
       content.replace(EXPORTS_EQUAL_REGEX, "return") +
-      " })()";
+      " })();";
   } else {
     // Else if there is no "module.exports = ", replace all "module.exports" with "INLINEIMPORTSRETVARNAME" and add a "var INLINEIMPORTSRETVARNAME = {};" at the beginning of the text. Wrap the text in an IIFE and return the IIFE string
     content =
       "(function() { var INLINEIMPORTSRETVARNAME = {}; " +
       content.replace(EXPORTS_REGEX, "INLINEIMPORTSRETVARNAME") +
-      " return INLINEIMPORTSRETVARNAME; })()";
+      " return INLINEIMPORTSRETVARNAME; })();";
   }
 
   // Check if there is any global require left  
