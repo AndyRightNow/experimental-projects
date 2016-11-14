@@ -3,10 +3,6 @@
 const extract = require("./../utils/extract");
 const path = require("path");
 
-// Match only require statements with raw relative or absolute paths
-const REQUIRE_REGEX = /require\s*\(\s*([\']|[\"])+.*?([\\]|[\/])+.*?\)/g;
-// Match a path as the second capture group
-const PATH_REGEX = /(\'|\")\s*(.*?)\s*(\'|\")/;
 // .js suffix
 const SUFFIX = ".js";
 
