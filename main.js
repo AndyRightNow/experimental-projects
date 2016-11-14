@@ -14,18 +14,17 @@ const TableTreeNode = require("./deps/table-tree");
 const inlineImports = require("./utils/inliner").inlineImports;
 const extract = require("./utils/extract");
 const TaskRunner = require("./task-runner/task-runner");
+const stripComments = require("./utils/strip-comments");
 
 // Constants
 const TEST_ROOT_DIR = path.resolve(__dirname, "./test");
 
-var p = path.resolve(TEST_ROOT_DIR, "inlineImports-test", "entry.js");
+var p = path.resolve(TEST_ROOT_DIR, "stripComments-test", "test.js");
 
 TaskRunner
   .text(p)
-  .task(inlineImports)
+  .task(stripComments)
   .output({
     dir: "./dist",
-    name: "entry.dist.js"
+    name: "test.dist.js"
   });
-
-require("./test/inlineImports-test/dist/entry.dist");

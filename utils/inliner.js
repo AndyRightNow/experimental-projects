@@ -131,7 +131,7 @@ function _inlineImportsHelper(p, content, table) {
         // Replace 'require' with IIFE string
         content = content.replace(
           reqs[i],
-          _inlineImportsHelper(pathName, extract.extractUTF8(pathName + JS_SUFFIX), table.next(fileName)));
+          () => { return _inlineImportsHelper(pathName, extract.extractUTF8(pathName + JS_SUFFIX), table.next(fileName)); });
       }
     }
   }
