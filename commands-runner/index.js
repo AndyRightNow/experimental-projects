@@ -8,7 +8,7 @@ const exec = require("child_process").exec;
  * @param {string} cmd A string of commands (connected by "&&" if more than one)
  * @return {Promise} A promise that takes the stdout as the resolve param and err as the reject and catch param
  **/
-function execPromise(cmd) {
+function _execPromise(cmd) {
   return new Promise((resolve, reject) => {
     exec(cmd, (err, stdout) => {
       if (err !== null) {
@@ -25,7 +25,7 @@ function execPromise(cmd) {
  * @param {string} cmds Multiple commands you want to concatenate. Separated by commas
  * @return {string} A concatenated command
  **/
-function concatCommands(cmds) {
+function _concatCommands(cmds) {
   var err = new Error("Invalid commands");
 
   var ret = arguments[0];
@@ -48,8 +48,8 @@ function concatCommands(cmds) {
  * @return {Promise} A promise that takes the stdout as the resolve param and err as the reject and catch param
  **/
 function run(cmds) {
-  var cmds = concatCommands.apply(null, arguments);
-  return execPromise(cmds);
+  var cmds = _concatCommands.apply(null, arguments);
+  return _execPromise(cmds);
 }
 
 module.exports = {

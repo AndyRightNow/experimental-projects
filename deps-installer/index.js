@@ -1,13 +1,14 @@
 const path = require("path");
 const fs = require("fs");
+const CommandsRunner = require("./commands-runner");
 
 function _checkOptions(options) {
   if (!options) {
     throw new Error("No arguments provided.");
   }
   else {
-    if (!options.dir ||
-      typeof options.dir !== "string") {
+    if (!options.destination ||
+      typeof options.destination !== "string") {
       throw new Error("Invalid installation directory.");
     }
     else if (!options.deps ||
@@ -19,17 +20,16 @@ function _checkOptions(options) {
   }
 }
 
-var DepsInstaller = {
-  install: function (options) {
+function install (options) {
     _checkOptions(options);
 
-    var dir = path.resolve(options.dir, "deps");
-    var deps = options.deps;
-    if (fs.existsSync(dir)) {
-      
-    }
-    else {
+    if (options.deps.length === 0) return;
 
+    var deps = options.deps;
+    var des = path.resolve(options.destination, "deps");
+    var exist = {};
+    
+    for (let i = 0, ll = deps.length; i < ll; i++) {
+        
     }
-  }
-};
+}

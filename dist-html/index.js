@@ -1,7 +1,7 @@
 "use strict";
 
 const path = require("path");
-const inlineFiles = require("./../inliner").inlineFiles;
+const inlineFiles = require("./../inline-files");
 const TaskRunner = require("./../task-runner");
 const replace = require("./../replace");
 
@@ -23,11 +23,7 @@ function distHTML(folderNames) {
       fileRegEx: /main.js/
     })
     .task(replace, {
-      match: /<link.*ESLSuiteStyle\.css".*?>/,
-      newSubstr: ""
-    })
-    .task(replace, {
-      match: /<script.*ESLSuitejs\.js".*?>.*?<\/script>/,
+      match: /<link.*ESLSuiteStyle\.css".*?>|<script.*ESLSuitejs\.js".*?>.*?<\/script>|<script.*jquery.*?>.*?<\/script>/g,
       newSubstr: ""
     })
     .output({
