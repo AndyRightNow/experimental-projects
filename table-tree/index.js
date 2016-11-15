@@ -1,4 +1,4 @@
-"use strict";
+"use stricta";
 
 module.exports = class TableTreeNode {
   /**

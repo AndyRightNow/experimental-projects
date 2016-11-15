@@ -11,7 +11,7 @@ const exec = require("child_process").exec;
 function _execPromise(cmd) {
   return new Promise((resolve, reject) => {
     exec(cmd, (err, stdout) => {
-      if (err !== null) {
+      if (err) {
         reject(err);
       }
       else resolve(stdout);

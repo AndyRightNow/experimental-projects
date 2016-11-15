@@ -14,6 +14,25 @@ const inlineImports = require("./inline-imports");
 const extract = require("./extract");
 const TaskRunner = require("./task-runner");
 const stripComments = require("./strip-comments");
+const DepsInstaller = require("./deps-installer");
 
-// Constants
-const TEST_ROOT_DIR = path.resolve(__dirname, "./test");
+
+var d = path.resolve(__dirname, "deps-installer", "test" , "dir2");
+
+// DepsInstaller.install({
+//   destination: d,
+//   dependencies: [
+//     "task-runner",
+//     "inline-imports",
+//     "dist-html"
+//   ]
+// });
+
+CommandsRunner
+  .run("robocopy /?")
+  .then(stdout => {
+    log(stdout);
+  })
+  .catch(err => {
+    log(err.message);
+  })

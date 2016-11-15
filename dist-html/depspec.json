@@ -1,7 +1,7 @@
 {
   "name": "dist-html",
   "dependencies": {
-    "0": "./../inliner",
+    "0": "./../inline-files",
     "1": "./../task-runner",
     "2": "./../replace"
   }
