@@ -4,7 +4,7 @@ const extract = require("./../extract");
 const path = require("path");
 const fs = require("fs");
 
-/*
+/**
  * Replace a substr(regexp) to new substr.
  *
  * @param {string} options.path Path name of the HTML file name to process

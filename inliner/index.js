@@ -19,7 +19,7 @@ const EXPORTS_EQUAL_REGEX = /module\s*\.\s*exports\s*\=/;
 const EXPORTS_REGEX = /module\s*\.\s*exports\s*/;
 const JS_SUFFIX = ".js";
 
-/*
+/**
  * Inline all specified files that fit the given regex and replace the HTML content in the argument object
  * passed in with the new text
  *
@@ -96,7 +96,7 @@ function inlineFiles(options) {
   options.content = htmlText;
 }
 
-/*
+/**
  * Helper function to inline all imports (requires) in a js file
  *
  * @param {string} p Path name of the js file name to process
@@ -158,7 +158,7 @@ function _inlineImportsHelper(p, content, table) {
   return content;
 }
 
-/*
+/**
  * Inline all imports (requires) in a js file
  *
  * @param {string} options.path Path name of the js file name to process

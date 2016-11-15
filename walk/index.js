@@ -3,7 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 
-/*
+/**
  * Recursively walk through all folders and files under a directory name
  *
  * @param {string} dirname A directory name to start

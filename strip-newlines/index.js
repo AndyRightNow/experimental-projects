@@ -2,7 +2,7 @@
 
 const NEWLINE_REGEX = /[\n\r]+/g;
 
-/*
+/**
  * Strip off all newlines in a file
  *
  * @param {string} options.path Path name of the HTML file name to process

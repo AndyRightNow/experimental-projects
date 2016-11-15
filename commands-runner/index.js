@@ -2,7 +2,7 @@
 
 const exec = require("child_process").exec;
 
-/*
+/**
  * Run exec function and return a promise for its results
  *
  * @param {string} cmd A string of commands (connected by "&&" if more than one)
@@ -19,7 +19,7 @@ function execPromise(cmd) {
   });
 }
 
-/*
+/**
  * Concatenate multiple commands with "&&" and return a string
  *
  * @param {string} cmds Multiple commands you want to concatenate. Separated by commas
@@ -40,7 +40,7 @@ function concatCommands(cmds) {
   return ret;
 }
 
-/*
+/**
  * Run a string of commands and return the promise representing the results of the stdout or error message of
  * the commands
  *
