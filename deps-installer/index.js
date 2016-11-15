@@ -84,7 +84,7 @@ function install(options) {
         console.log("Success: ", stdout);
       })
       .catch(err => {
-        console.log("Error: ", err);
+        console.log("Error: ", err.message);
       });
   }
 }
