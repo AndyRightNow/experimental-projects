@@ -17,4 +17,15 @@ const stripComments = require("./strip-comments");
 const DepsInstaller = require("./deps-installer");
 const fCopyUTF8 = require("./fcopy-utf8");
 
-var d = path.resolve(__dirname, "deps-installer", "test", "dir1");
+var d = path.resolve(__dirname, "../", "ESLSuiteFramework");
+
+
+DepsInstaller.install({
+  destination: d,
+  dependencies: [
+    "task-runner",
+    "strip-comments",
+    "strip-newlines",
+    "inline-imports"
+  ]
+});

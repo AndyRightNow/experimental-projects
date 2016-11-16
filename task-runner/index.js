@@ -59,7 +59,7 @@ TaskTarget.prototype.output = function (argObj) {
   
   var finalDir = path.resolve(path.dirname(this.path), dir);
   if (!fs.existsSync(finalDir)) {
-    fs.mkdir(finalDir);
+    fs.mkdirSync(finalDir);
   }
   fs.writeFileSync(path.resolve(finalDir, name), this.content, "UTF-8");
 
