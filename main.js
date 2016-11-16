@@ -22,8 +22,6 @@ var d = path.resolve(__dirname, "deps-installer", "test" , "dir2");
 DepsInstaller.install({
   destination: d,
   dependencies: [
-    "task-runner",
-    "inline-imports",
     "dist-html"
   ]
 });

@@ -19,7 +19,8 @@ function replace(options) {
     throw new Error("Invalid arguments!");
   }
 
-  options.content = options.content.replace(options.match, options.newSubstr || options.newSubstrFunc);
+  options.content = options.content.replace(options.match,
+    typeof options.newSubstr === "undefined" ? options.newSubstrFunc : options.newSubstr);
 }
 
 module.exports = replace;

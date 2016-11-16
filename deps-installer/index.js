@@ -79,7 +79,7 @@ function install(options) {
     let src = path.resolve(__dirname, "../", dep).replace(/\\/g, "/");
     let desFolder = path.resolve(des, dep).replace(/\\/g, "/");
     CommandsRunner
-      .run(`ROBOCOPY  /IS ${src} ${desFolder}`)
+      .run(`ROBOCOPY ${src} ${desFolder} /is`)
       .then(stdout => {
         console.log("Success: ", stdout);
       })

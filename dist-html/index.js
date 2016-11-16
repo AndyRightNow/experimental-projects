@@ -5,7 +5,7 @@ const inlineFiles = require("./../inline-files");
 const TaskRunner = require("./../task-runner");
 const replace = require("./../replace");
 
-const ROOT_DIR = path.resolve(__dirname, "../");
+const ROOT_DIR = path.resolve(__dirname, "../../../");
 
 function distHTML(folderNames) {
   var p = ROOT_DIR;
