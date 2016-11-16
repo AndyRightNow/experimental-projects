@@ -19,13 +19,21 @@ const fCopyUTF8 = require("./fcopy-utf8");
 
 var d = path.resolve(__dirname, "../", "ESLSuiteFramework");
 
+// DepsInstaller.install({
+//   destination: d,
+//   dependencies: [
+//     "task-runner",
+//     "strip-comments",
+//     "strip-newlines",
+//     "inline-imports"
+//   ]
+// });
 
-DepsInstaller.install({
-  destination: d,
-  dependencies: [
-    "task-runner",
-    "strip-comments",
-    "strip-newlines",
-    "inline-imports"
-  ]
-});
+CommandsRunner
+  .run("git push origin master")
+  .then(stdout => {
+    log(stdout);
+  })
+  .catch(err => {
+    log(err.message);
+  });
