@@ -15,13 +15,6 @@ const extract = require("./extract");
 const TaskRunner = require("./task-runner");
 const stripComments = require("./strip-comments");
 const DepsInstaller = require("./deps-installer");
+const fCopyUTF8 = require("./fcopy-utf8");
 
-
-var d = path.resolve(__dirname, "deps-installer", "test" , "dir2");
-
-DepsInstaller.install({
-  destination: d,
-  dependencies: [
-    "dist-html"
-  ]
-});
+var d = path.resolve(__dirname, "deps-installer", "test", "dir1");

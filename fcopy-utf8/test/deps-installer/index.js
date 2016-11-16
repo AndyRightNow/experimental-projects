@@ -2,7 +2,6 @@ const path = require("path");
 const fs = require("fs");
 const extract = require("./../extract");
 const CommandsRunner = require("./../commands-runner");
-const fCopyUTF8 = require("./../fcopy-utf8");
 
 function _checkOptions(options) {
   if (!options) {
@@ -77,12 +76,16 @@ function install(options) {
   for (let dep of finalDeps) {
     dep = dep.match(/[\\/]/) ? dep.split(dep.indexOf("/") !== -1 ? '/' : '\\').splice(-1)[0] : dep;
 
-    let src = path.resolve(__dirname, "../", dep);
-    let desFolder = path.resolve(des);
-    fCopyUTF8({
-      source: src,
-      destination: desFolder
-    });
+    let src = path.resolve(__dirname, "../", dep).replace(/\\/g, "/");
+    let desFolder = path.resolve(des, dep).replace(/\\/g, "/");
+    CommandsRunner
+      .run(`ROBOCOPY ${src} ${desFolder} /is`)
+      .then(stdout => {
+        console.log("Success: ", stdout);
+      })
+      .catch(err => {
+        console.log("Error: ", err.message);
+      });
   }
 }
 
