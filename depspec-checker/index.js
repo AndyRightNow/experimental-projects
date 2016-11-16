@@ -74,10 +74,16 @@ function depSpecChecker(options) {
       let depSpecJSON = JSON.parse(extractUTF8(depSpecPath));
 
       let depSpecDeps = depSpecJSON["dependencies"] || {};
-      Object.keys(depSpecDeps).map(val => {
-        isMatched = isMatched ? reqPathsExist.hasOwnProperty(depSpecDeps[val]) : isMatched;
+      let depSpecDepsIndicies = Object.keys(depSpecDeps);
+      if (depSpecDepsIndicies.length !== reqPaths.length) {
+        isMatched = false;
+      }
+      else {
+        depSpecDepsIndicies.map((val, index, arr) => {
+        isMatched = isMatched ? reqPathsExist.hasOwnProperty(depSpecDeps[val]) && arr.length === reqPaths.length : isMatched;
         return depSpecDeps[val];
       });
+      }
 
       console.log(`depspec.json in ${deps[i]} ${isMatched ? "matches" : "does not match"}.`);
     }

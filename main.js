@@ -21,11 +21,9 @@ const depSpecChecker = require("./depspec-checker");
 var d = path.resolve(__dirname, "../", "ESLSuiteFramework");
 
 
-CommandsRunner
-  .run("git push origin master")
-  .then(stdout => {
-    log("Success:", stdout);
-  })
-  .catch(err => {
-    log(err.message);
-  });
+depSpecChecker({
+  dependencies: [
+    "commands-runner"
+  ],
+  updateFlag: true
+});
