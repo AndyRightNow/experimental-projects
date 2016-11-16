@@ -1,7 +1,1 @@
-{
-  "name": "inliner",
-  "dependencies": {
-    "0": "./../extract",
-    "1": "./../table-tree"
-  }
-}
+{"name":"inline-imports","dependencies":{"0":"./../extract","1":"./../table-tree"}}

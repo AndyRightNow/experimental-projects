@@ -1,6 +1,1 @@
-{
-  "name": "inline-files",
-  "dependencies": {
-    "0": "./../extract"
-  }
-}
+{"name":"inline-files","dependencies":{"0":"./../extract"}}

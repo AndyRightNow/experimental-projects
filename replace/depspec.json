@@ -1,6 +1,1 @@
-{
-  "name": "replace",
-  "dependencies": {
-    "0": "./../extract"
-  }
-}
+{"name":"replace","dependencies":{"0":"./../extract"}}

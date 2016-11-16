@@ -16,8 +16,7 @@ function _checkOptions(options) {
 
     if (typeof options.updateFlag !== "boolean") {
       throw new Error("Invalid flag.");
-    }
-    else if (!options.dependencies ||
+    } else if (!options.dependencies ||
       (typeof options.dependencies !== "string" &&
         !(options.dependencies instanceof Array))) {
       throw new Error("Invalid dependencies");
@@ -35,23 +34,76 @@ function _checkOptions(options) {
  * @param {boolean} options.updateFlag The flag to indicate that whether it will update the
  *                                      depspec.json if not matching. Default to false;
  */
-function DepSpecChecker(options) {
+function depSpecChecker(options) {
   _checkOptions(options);
 
-  var deps = options.dependencies;
+  let deps = options.dependencies;
+  // Matched count and unmatched count
+  let mC = 0, umC = 0;
   for (let i = 0, ll = deps.length; i < ll; i++) {
-    var indexPath = path.resolve(__dirname, "../", deps[i]);
+    let isMatched = true;
+    // Dir of index.js
+    let indexDir = path.resolve(__dirname, "../", deps[i]);
 
-    if (!fs.existsSync(indexPath) || !fs.lstatSync(indexPath).isDirectory()) {
+    if (!fs.existsSync(indexDir) || !fs.lstatSync(indexDir).isDirectory()) {
       throw new Error("Invalid dependencies.");
     }
 
-    var indexContent = extractUTF8(path.resolve(indexPath, "index.js"));
+    // Extracted content of index.js
+    let indexContent = extractUTF8(path.resolve(indexDir, "index.js"));
 
     if (indexContent === null) {
       throw new Error(`index.js of ${deps[i]} does not exist.`);
     }
 
-    var reqs = (indexContent.match(LOCAL_REQUIRE_REGEX) || []).map(val => val.match(PATH_REGEX)[2]);
+    // Table to keep track of require dependencies
+    let reqPathsExist = {};
+
+    let reqPaths = (indexContent.match(LOCAL_REQUIRE_REGEX) || []).map(val => {
+      let p = val.match(PATH_REGEX)[2];
+      reqPathsExist[p] = true;
+      return p;
+    });
+    
+    let depSpecPath = path.resolve(__dirname, "../", deps[i], "depspec.json");
+
+    if (!fs.existsSync(depSpecPath)) {
+      console.log(`depspec.json in ${deps[i]} does not exist.`);
+      isMatched = false;
+    } else {
+      let depSpecJSON = JSON.parse(extractUTF8(depSpecPath));
+
+      let depSpecDeps = depSpecJSON["dependencies"] || {};
+      Object.keys(depSpecDeps).map(val => {
+        isMatched = isMatched ? reqPathsExist.hasOwnProperty(depSpecDeps[val]) : isMatched;
+        return depSpecDeps[val];
+      });
+
+      console.log(`depspec.json in ${deps[i]} ${isMatched ? "matches" : "does not match"}.`);
+    }
+
+    if (options.updateFlag) {
+      if (isMatched) {
+        console.log("All dependencies up-to-date.");
+        mC++;
+      } else {
+        let depspec = {
+          "name": deps[i],
+          "dependencies": {
+
+          }
+        };
+        for (let ii = 0, ll = reqPaths.length; ii < ll; ii++)
+          depspec.dependencies[ii] = reqPaths[ii];
+        fs.writeFileSync(depSpecPath, JSON.stringify(depspec), "utf8");
+        console.log(`Updated depspec.json in ${deps[i]}`);
+        umC++;
+      }
+    }
+
+    console.log("--------------------------");
   }
+  console.log(`${deps.length} dependencies in total. ${mC} matched and ${umC} unmatched.`);
 }
+
+module.exports = depSpecChecker;

@@ -20,15 +20,10 @@ function _checkOptions(options) {
 }
 
 function _getDependenciesInDepSpec(depRelDir) {
-  var json = JSON.parse(extract.extractUTF8(path.resolve(__dirname, depRelDir, "depspec.json")))["dependencies"] || null;
-  if (json) {
-    for (let i = 0;; i++) {
-      if (!json.hasOwnProperty(i)) {
-        json.length = i;
-        return Array.from(json);
-      }
-    }
-  } else return json;
+  var deps = JSON.parse(extract.extractUTF8(path.resolve(__dirname, depRelDir, "depspec.json")))["dependencies"] || null;
+  if (deps) {
+    return Object.keys(deps).map(val => deps[val]);
+  } else return deps;
 }
 
 /**

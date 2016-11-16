@@ -1,0 +1,6 @@
+{
+  "name": "depspec-checker",
+  "dependencies": {
+    "0": "./../extract"
+  }
+}

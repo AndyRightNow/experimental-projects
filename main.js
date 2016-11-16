@@ -16,24 +16,38 @@ const TaskRunner = require("./task-runner");
 const stripComments = require("./strip-comments");
 const DepsInstaller = require("./deps-installer");
 const fCopyUTF8 = require("./fcopy-utf8");
+const depSpecChecker = require("./depspec-checker");
 
 var d = path.resolve(__dirname, "../", "ESLSuiteFramework");
 
-// DepsInstaller.install({
-//   destination: d,
-//   dependencies: [
-//     "task-runner",
-//     "strip-comments",
-//     "strip-newlines",
-//     "inline-imports"
-//   ]
-// });
+depSpecChecker({
+  dependencies: [
+    "benchmark",
+    "commands-runner",
+    "deps-installer",
+    "depspec-checker",
+    "dist-html",
+    "extract",
+    "fcopy-utf8",
+    "inline-files",
+    "inline-imports",
+    "packer",
+    "replace",
+    "request-promise",
+    "strip-comments",
+    "strip-newlines",
+    "table-tree",
+    "task-runner",
+    "walk"
+  ],
+  updateFlag: true
+});
 
-CommandsRunner
-  .run("git push origin master")
-  .then(stdout => {
-    log(stdout);
-  })
-  .catch(err => {
-    log(err.message);
-  });
+// CommandsRunner
+//   .run("git push origin master")
+//   .then(stdout => {
+//     log("Success:", stdout);
+//   })
+//   .catch(err => {
+//     log(err.message);
+//   });
