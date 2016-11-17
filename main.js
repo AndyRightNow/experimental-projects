@@ -18,12 +18,5 @@ const DepsInstaller = require("./deps-installer");
 const fCopyUTF8 = require("./fcopy-utf8");
 const depSpecChecker = require("./depspec-checker");
 
-var d = path.resolve(__dirname, "../", "ESLSuiteFramework");
+var d = path.resolve(__dirname, "testtest");
 
-
-depSpecChecker({
-  dependencies: [
-    "commands-runner"
-  ],
-  updateFlag: true
-});

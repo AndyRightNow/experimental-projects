@@ -1,1 +1,8 @@
-{"name":"deps-installer","dependencies":{"0":"./../extract","1":"./../commands-runner","2":"./../fcopy-utf8"}}
+{
+  "name": "deps-installer",
+  "dependencies": {
+    "0": "./../extract",
+    "1": "./../commands-runner",
+    "2": "./../fcopy-utf8"
+  }
+}

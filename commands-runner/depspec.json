@@ -1,7 +1,4 @@
 {
   "name": "commands-runner",
-  "dependencies": {
-    "0": "./src/exec-promise",
-    "1": "./src/concat-commands"
-  }
+  "dependencies": {}
 }

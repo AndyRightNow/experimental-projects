@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 // Match only require statements with raw relative or absolute paths
-const LOCAL_REQUIRE_REGEX = /require\s*\(\s*([\']|[\"])+.*?([\\]|[\/])+.*?\)/g;
+const LOCAL_DEP_REQUIRE_REGEX = /require\s*\(.*?(\.\.[\/\\])+.*?\)/g;
 // Match a path as the second capture group
 const PATH_REGEX = /(\'|\")\s*(.*?)\s*(\'|\")/;
 
@@ -59,7 +59,7 @@ function depSpecChecker(options) {
     // Table to keep track of require dependencies
     let reqPathsExist = {};
 
-    let reqPaths = (indexContent.match(LOCAL_REQUIRE_REGEX) || []).map(val => {
+    let reqPaths = (indexContent.match(LOCAL_DEP_REQUIRE_REGEX) || []).map(val => {
       let p = val.match(PATH_REGEX)[2];
       reqPathsExist[p] = true;
       return p;

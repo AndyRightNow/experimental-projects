@@ -1,0 +1,1 @@
+const execPromise = require("./src/exec-promise");
