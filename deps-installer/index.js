@@ -47,7 +47,7 @@ function _installHelper(deps, finalDeps) {
  * Install dependencies in a directory
  *
  * @param {string} options.destination The absolute destination directory to install dependencies in.
- * @param {string|Array} options.deps The dependencies to install
+ * @param {string|Array} options.dependencies The dependencies to install
  *
  */
 function install(options) {

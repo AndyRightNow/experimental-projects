@@ -20,4 +20,11 @@ const depSpecChecker = require("./depspec-checker");
 
 var d = path.resolve(__dirname, "testtest");
 
+DepsInstaller.install({
+  destination: "C:/Users/andy/Desktop/ESL Suite/Website/nodejs-tools",
+  dependencies: [
+    'dist-html',
+    'inline-files'
+  ]
+});
 

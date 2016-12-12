@@ -12,6 +12,7 @@ const fs = require("fs");
  * @param {string} options.content Content of the HTML file name to process
  * @param {string} options.type File type, CSS or JS (case-insensitive)
  * @param {RegExp} options.fileRegEx Regular expression representing the file names
+ * @param {Array} options.plugins An array of plugin functions taking the file content as the argument
  */
 function inlineFiles(options) {
   // Note: exclude all links with any type of URL reference or absolute path
@@ -57,6 +58,13 @@ function inlineFiles(options) {
       htmlDirname,
       matchedLinks[i].match(type === "css" ? CSS_HREF_REGEX : JS_SRC_REGEX)[1]);
     thisFileText = extract.extractUTF8(fileDirname);
+
+    // Use plugins
+    if (options.plugins) {
+      for (let j = 0, ll = options.plugins.length; j < ll; j++) {
+        thisFileText = options.plugins[j](thisFileText);
+      }
+    }
 
     if (type === "css") {
       fileText += thisFileText !== null ? thisFileText : "";
